@@ -15,7 +15,7 @@
 #include "card.h"
 using namespace std;
 
-
+/*
 class Player
 {
 public:
@@ -83,6 +83,6 @@ private:
     string myName;
 
 };
-
+*/
 
 #endif

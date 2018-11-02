@@ -10,11 +10,11 @@ using namespace std;
 
 
 // PROTOTYPES for functions used by this demonstration program:
-void dealHand(Deck &d, Player &p, int numCards);
+//void dealHand(Deck &d, Player &p, int numCards);
 
 
 
-
+/*
 int main( )
 {
     int numCards = 5;
@@ -43,4 +43,18 @@ void dealHand(Deck &d, Player &p, int numCards)
 }
 
 
+*/
 
+int main(){
+    cout << "Hello World" << endl;
+    Card c1 = Card();
+    cout << c1 << endl;
+    c1 = Card(6,Card::hearts);
+    Card c2 = Card(7,Card::hearts);
+    cout << (c1 == c2) << endl;
+    cout << c1.sameSuitAs(c2) << endl;
+    cout << c1.getRank() << endl;
+    cout << (c1 != c2) << endl;
+    cout << c1 << "   " << c2 << endl;
+    return 0;
+}
