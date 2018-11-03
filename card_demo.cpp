@@ -3,7 +3,7 @@
 #include <iostream>    // Provides cout and cin
 #include <cstdlib>     // Provides EXIT_SUCCESS
 #include "card.h"
-#include "player.h"
+//#include "player.h"
 #include "deck.h"
 
 using namespace std;
@@ -18,31 +18,21 @@ using namespace std;
 int main( )
 {
     int numCards = 5;
-
     Player p1("Joe");
     Player p2("Jane");
-
     Deck d;  //create a deck of cards
     d.shuffle();
-
     dealHand(d, p1, numCards);
     dealHand(d, p2, numCards);
-
     cout << p1.getName() <<" has : " << p1.showHand() << endl;
     cout << p2.getName() <<" has : " << p2.showHand() << endl;
-
     return EXIT_SUCCESS;
 }
-
-
-
 void dealHand(Deck &d, Player &p, int numCards)
 {
     for (int i=0; i < numCards; i++)
         p.addCard(d.dealCard());
 }
-
-
 */
 
 int main(){
@@ -56,5 +46,22 @@ int main(){
     cout << c1.getRank() << endl;
     cout << (c1 != c2) << endl;
     cout << c1 << "   " << c2 << endl;
+    Deck d;
+    int size = d.size(); 
+    cout << size <<endl; 
+    d.shuffle();
+    cout << size <<endl; 
+    c1 = d.dealCard(); 
+    c2 = d.dealCard(); 
+    cout << c1 << "   " << c2 << endl;
+    d.shuffle();
+    d.shuffle();
+    c1 = d.dealCard(); 
+    c2 = d.dealCard();
+    size = d.size();
+    cout << size <<endl; 
+    cout << c1 << "   " << c2 << endl;
+
+
     return 0;
 }
