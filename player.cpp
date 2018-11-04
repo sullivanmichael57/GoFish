@@ -41,6 +41,7 @@ Card Player::removeCardFromHand(Card c){
     for (handIter = myHand.begin() ; handIter != myHand.end();handIter++){
         if (*handIter == c){
             myHand.erase(handIter);
+            return c;
         }
     }
     return c;
