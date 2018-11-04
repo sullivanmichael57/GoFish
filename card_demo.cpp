@@ -5,7 +5,7 @@
 #include "card.h"
 //#include "player.h"
 #include "deck.h"
-
+#include "player.h"
 using namespace std;
 
 
@@ -37,6 +37,7 @@ void dealHand(Deck &d, Player &p, int numCards)
 
 int main(){
     cout << "Hello World" << endl;
+    //tests Card class
     Card c1 = Card();
     cout << c1 << endl;
     c1 = Card(6,Card::hearts);
@@ -46,6 +47,8 @@ int main(){
     cout << c1.getRank() << endl;
     cout << (c1 != c2) << endl;
     cout << c1 << "   " << c2 << endl;
+
+    //tests Deck class
     Deck d;
     int size = d.size(); 
     cout << size <<endl; 
@@ -63,5 +66,28 @@ int main(){
     cout << c1 << "   " << c2 << endl;
 
 
+    //tests player class
+
+    Deck deck;
+    deck.shuffle();
+    Player p1("James");
+    for (int i = 0 ; i < 10 ; i++){
+        p1.addCard(deck.dealCard());
+    }
+    cout << "Hand: " << p1.showHand() << endl;
+    cout << "Books: " << p1.showBooks() << endl;
+    while (p1.checkHandForPair(c1,c2)){
+        p1.bookCards(c1,c2);
+        p1.removeCardFromHand(c1);
+        p1.removeCardFromHand(c2);
+        cout << "Books: " << p1.showBooks() << endl;
+    }
+    cout << "random chosen card from hand: " << p1.chooseCardFromHand() << endl;
+    if (p1.cardInHand(p1.chooseCardFromHand())){
+        cout << "yep, card is in hand" << endl;
+    }
+    cout << "Hand: " << p1.showHand() << endl;
+    c1 = Card(12,Card::Suit::diamonds);
+    cout << "Is there a Queen in this deck? " << (p1.sameRankInHand(c1)?"true":"false") << endl;
     return 0;
 }
