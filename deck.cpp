@@ -15,21 +15,10 @@ using namespace std;
 //creates deck in order suits going from spades, hearts, diamonds, clubs 
 //goes from ace to king within each suit 
 Deck::Deck() {
-    //unsigned int seed = (unsigned) time(0); //initializes random values only once
-    unsigned int seed = 0;
+    unsigned int seed = (unsigned) time(0); //initializes random values only once
     srand(seed);
     myIndex = 0;
     int index = 0;
-    /**
-    for(int i = 0; i < 4; i++)
-    {
-    	for(int j = 1; j < 14; j++)
-    	{
-    		Card temp = Card(j, i); 
-    		myCards[(i+1)*j] = temp; 
-    	}
-    }
-    */
 
     for (int j = 1; j < 14; j++) {
         Card temp = Card(j, Card::spades);
