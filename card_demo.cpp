@@ -12,82 +12,80 @@ using namespace std;
 // PROTOTYPES for functions used by this demonstration program:
 //void dealHand(Deck &d, Player &p, int numCards);
 
+void bookPairs(Player p);
 
 
-/*
-int main( )
-{
-    int numCards = 5;
-    Player p1("Joe");
-    Player p2("Jane");
-    Deck d;  //create a deck of cards
-    d.shuffle();
-    dealHand(d, p1, numCards);
-    dealHand(d, p2, numCards);
-    cout << p1.getName() <<" has : " << p1.showHand() << endl;
-    cout << p2.getName() <<" has : " << p2.showHand() << endl;
-    return EXIT_SUCCESS;
-}
-void dealHand(Deck &d, Player &p, int numCards)
-{
-    for (int i=0; i < numCards; i++)
-        p.addCard(d.dealCard());
-}
-*/
 
 int main(){
     cout << "Hello World" << endl;
-    //tests Card class
-    Card c1 = Card();
-    cout << c1 << endl;
-    c1 = Card(6,Card::hearts);
-    Card c2 = Card(7,Card::hearts);
-    cout << (c1 == c2) << endl;
-    cout << c1.sameSuitAs(c2) << endl;
-    cout << c1.getRank() << endl;
-    cout << (c1 != c2) << endl;
-    cout << c1 << "   " << c2 << endl;
 
-    //tests Deck class
+    Player p1 = Player("Michael");
+    Player p2 = Player("Kavya");
     Deck d;
-    int size = d.size(); 
-    cout << size <<endl; 
     d.shuffle();
-    cout << size <<endl; 
-    c1 = d.dealCard(); 
-    c2 = d.dealCard(); 
-    cout << c1 << "   " << c2 << endl;
-    d.shuffle();
-    d.shuffle();
-    c1 = d.dealCard(); 
-    c2 = d.dealCard();
-    size = d.size();
-    cout << size <<endl; 
-    cout << c1 << "   " << c2 << endl;
+
+    for (int i = 0;i<7;i++){ // deal cards to players
+        p1.addCard(d.dealCard());
+        p2.addCard(d.dealCard());
+    }
+    cout << p1.getName() << ": " << p1.showHand() << endl;
+    cout << p2.getName() << ": " << p2.showHand() << endl;
+
+    bookPairs(p1);
+    bookPairs(p2);
+    cout << p1.getName() << ": " << p1.showBooks() << endl;
+    cout << p2.getName() << ": " << p2.showBooks() << endl;
 
 
-    //tests player class
+    //This while loop is the big boy, when it is over, the game is over
+    while (p1.getBookSize()<28 && p2.getBookSize()<28 && d.size()>0){
+        Card card_chosen = p1.chooseCardFromHand();
+        if (p2.sameRankInHand(card_chosen)){
+            //okay they had at least one of the cards, remove them from p2 and give to p1
+            if (p2.cardInHand(Card(card_chosen.getRank(),Card::Suit::diamonds))){
+                p1.addCard(p2.removeCardFromHand(Card(card_chosen.getRank(),Card::Suit::diamonds)));
 
-    Deck deck;
-    deck.shuffle();
-    Player p1("James");
-    for (int i = 0 ; i < 10 ; i++){
-        p1.addCard(deck.dealCard());
+            }else if (p2.cardInHand(Card(card_chosen.getRank(),Card::Suit::hearts))){
+                p1.addCard(p2.removeCardFromHand(Card(card_chosen.getRank(),Card::Suit::hearts)));
+
+            }else if (p2.cardInHand(Card(card_chosen.getRank(),Card::Suit::clubs))){
+                p1.addCard(p2.removeCardFromHand(Card(card_chosen.getRank(),Card::Suit::clubs)));
+
+            }else if (p2.cardInHand(Card(card_chosen.getRank(),Card::Suit::spades))){
+                p1.addCard(p2.removeCardFromHand(Card(card_chosen.getRank(),Card::Suit::spades)));
+
+            }
+        }else{
+            //go fish
+            p1.addCard(d.dealCard());
+        }
+
     }
-    cout << "Hand: " << p1.showHand() << endl;
-    cout << "Books: " << p1.showBooks() << endl;
-    while (p1.checkHandForPair(c1,c2)){
-        p1.bookCards(c1,c2);
-        p1.removeCardFromHand(c1);
-        p1.removeCardFromHand(c2);
-        cout << "Books: " << p1.showBooks() << endl;
-    }
-    cout << "random chosen card from hand: " << p1.chooseCardFromHand() << endl;
-    if (p1.cardInHand(p1.chooseCardFromHand())){
-        cout << "yep, card is in hand" << endl;
-    }
-    cout << "Hand: " << p1.showHand() << endl;
-    c1 = Card(12,Card::Suit::diamonds);
-    cout << "Is there a Queen in this deck? " << (p1.sameRankInHand(c1)?"true":"false") << endl;
+    cout << "The Game Has Ended. Wasn't That Fun!" << endl;
     return 0;
 }
+
+
+/*
+ * first: player books all pairs they have
+ * loop {
+ * player1 asks player 2 if they have a certain rank
+ * if player 2 has any cards of that rank, they are given to player 1
+ * if not, player 1 must go fish
+ * player 1 checks for pairs again and books them
+ * player 2 repeats
+ * }
+ *
+ */
+
+void bookPairs(Player p){
+    Card c1; // books initial pairs
+    Card c2;
+    while (p.checkHandForPair(c1,c2)){
+        p.bookCards(c1,c2);
+        p.removeCardFromHand(c1);
+        p.removeCardFromHand(c2);
+    }
+}
+
+
