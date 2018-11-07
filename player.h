@@ -13,6 +13,13 @@
 
 
 #include "card.h"
+#include "deck.h"
+#include "random"
+#include "ctime"
+#include <fstream>
+#include <cstdlib>
+#include "stdlib.h"
+
 using namespace std;
 
 

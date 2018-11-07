@@ -3,8 +3,11 @@
 //
 
 #include "player.h"
-#include "random"
+//#include "random"
 #include "ctime"
+#include <fstream>
+#include <cstdlib>
+#include "stdlib.h"
 
 Player::Player(){
     myName=" ";
@@ -37,7 +40,7 @@ bool Player::cardInHand(Card c) const{
 
 Card Player::removeCardFromHand(Card c){
 
-    vector<Card>::const_iterator handIter;
+    vector<Card>::iterator handIter;
     for (handIter = myHand.begin() ; handIter != myHand.end();handIter++){
         if (*handIter == c){
             myHand.erase(handIter);
