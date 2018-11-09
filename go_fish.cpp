@@ -20,7 +20,7 @@ void bookPairs(Player &p);
 int main(){
     cout << "Program Started, Thats a Good Sign!" << endl;
     ofstream myfile;
-    myfile.open("outputfile.txt");
+    myfile.open("gofish_results.txt");
 
     //players and pointers to players are created
     Player pl1 = Player("Michael");
