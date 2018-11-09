@@ -8,7 +8,7 @@ include_directories(.)
 add_executable(GoFish
         card.cpp
         card.h
-        card_demo.cpp
+        go_fish.cpp
         deck.cpp
         deck.h
         player.cpp

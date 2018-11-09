@@ -63,14 +63,13 @@ void Deck::shuffle() {
 }
 
 //returns top card on deck
-//if deck has no cards in it will primt an error message 
+//precondition : the deck has at least one card on it
 Card Deck::dealCard() {
     if (myIndex < 52) {
         myIndex++;
         return myCards[myIndex - 1];
     } else {
-
-        cout << "The Deck is empty" << endl;
+        //cout << "The Deck is empty" << endl;
         return Card();
     }
 }
