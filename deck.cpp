@@ -1,5 +1,5 @@
 //
-// Created by Michael Sullivan1 on 11/1/18.
+// Written by Kavya Duvedi and Michael Sullivan
 //
 
 #include "deck.h"

@@ -3,7 +3,9 @@
 
 
 // FILE: card_demo.cpp
-// This is a small demonstration program showing how the Card and Deck classes are used.
+// This is the driver for a game of Go Fish
+// Written by Kavya Duvedi and Michael Sullivan
+
 #include <iostream>    // Provides myfile and cin
 #include <cstdlib>     // Provides EXIT_SUCCESS
 #include "card.h"
